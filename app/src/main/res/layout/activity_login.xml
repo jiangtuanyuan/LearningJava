@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_120"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/logo" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_marginLeft="@dimen/dp_40"
+                    android:layout_marginRight="@dimen/dp_40"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:src="@drawable/ic_login_user_name" />
+
+                    <EditText
+                        android:id="@+id/et_user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_30"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:digits="0123456789"
+                        android:hint="用户名"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="#EFE0E3"
+                        android:textSize="@dimen/sp_13" />
+
+                    <ImageView
+                        android:id="@+id/iv_user_name_cler"
+                        android:layout_width="@dimen/dp_16"
+                        android:layout_height="@dimen/dp_16"
+                        android:background="@drawable/ic_cler_gray"
+                        android:scaleType="center"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginLeft="@dimen/dp_70"
+                    android:layout_marginRight="@dimen/dp_40"
+                    android:background="@color/line_bg_color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_marginLeft="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_50"
+                    android:layout_marginRight="@dimen/dp_40"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:src="@drawable/ic_login_user_pwd" />
+
+                    <EditText
+                        android:id="@+id/et_user_pwd"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="@dimen/dp_30"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:hint="密码"
+                        android:inputType="textPassword"
+                        android:maxLength="16"
+                        android:textColor="@color/black"
+                        android:textColorHint="#EFE0E3"
+                        android:textSize="@dimen/sp_13" />
+
+                    <CheckBox
+                        android:id="@+id/cb_user_pwd_sh"
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:baselineAligned="false"
+                        android:button="@drawable/selector_login_pwd_showhide"
+                        android:gravity="center"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginLeft="@dimen/dp_70"
+                    android:layout_marginRight="@dimen/dp_40"
+                    android:background="@color/line_bg_color" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/main_color"
+                    android:layout_marginLeft="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_40"
+                    android:text="注册>>"
+                    android:gravity="right"
+                    android:textSize="@dimen/sp_12" />
+
+                <RadioGroup
+                    android:id="@+id/rg_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_40"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_type_students"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_11"
+                        android:button="@null"
+                        android:drawablePadding="@dimen/dp_4"
+                        android:drawableLeft="@drawable/selector_login_user_type"
+                        android:checked="true"
+                        android:textColor="@drawable/selector_tab_text"
+                        android:text="学生" />
+
+                    <RadioButton
+                        android:id="@+id/rb_type_teacher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_11"
+                        android:button="@null"
+                        android:textColor="@drawable/selector_tab_text"
+                        android:drawablePadding="@dimen/dp_4"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:drawableLeft="@drawable/selector_login_user_type"
+                        android:text="老师" />
+
+                    <RadioButton
+                        android:id="@+id/rb_type_admin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_11"
+                        android:textColor="@drawable/selector_tab_text"
+                        android:button="@null"
+                        android:drawablePadding="@dimen/dp_4"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:drawableLeft="@drawable/selector_login_user_type"
+                        android:text="管理员" />
+
+                </RadioGroup>
+
+
+                <Button
+                    android:id="@+id/bt_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginLeft="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_50"
+                    android:layout_marginRight="@dimen/dp_40"
+                    android:background="@drawable/dialog_fly_shape_ok"
+                    android:text="登 录"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

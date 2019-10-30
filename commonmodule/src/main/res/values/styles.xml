@@ -1,0 +1,73 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!--toolbar popup_theme的样式-->
+    <style name="popup_theme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <!--设置背景-->
+        <item name="android:background">@color/color_transparent</item>
+        <!--设置字体颜色-->
+        <item name="android:textColor">@color/color_white</item>
+        <!--设置不覆盖锚点-->
+        <item name="overlapAnchor">false</item>
+    </style>
+
+    <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <!--menu字体大小-->
+        <item name="android:textSize">13sp</item>
+        <!--修改toolbar的Title(大标题)颜色-->
+        <item name="android:textColorPrimary">@color/color_white</item>
+        <!--修改toolbar的subtitle(小标题)颜色-->
+        <item name="subtitleTextColor">@color/color_white</item>
+        <!--menu字体颜色,我这定义name时加上了android:，结果不管用-->
+        <!--<item name="actionMenuTextAppearance">@style/MenuTextStyle</item>-->
+        <!--修改toolbar的图标颜色 三个点 ...-->
+        <item name="colorControlNormal">@color/color_white</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <!--Toolbar 主标题大小-->
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="base_picture_alert_dialog" parent="android:Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@color/color_transparent</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:backgroundDimAmount">0.4</item>
+    </style>
+
+    <style name="BaseDialogWindowStyle">
+        <item name="android:windowEnterAnimation">@anim/common_modal_in</item>
+        <item name="android:windowExitAnimation">@anim/common_modal_out</item>
+    </style>
+
+    <style name="CustomDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item><!--取消默认Dialog的windowFrame框-->
+        <item name="android:windowNoTitle">true</item><!--设置无标题Dialog-->
+        <item name="android:backgroundDimEnabled">true</item><!--是否四周变暗-->
+        <item name="android:windowIsFloating">true</item><!-- 是否悬浮在activity上 -->
+        <item name="android:windowContentOverlay">@null</item><!-- 取消默认ContentOverlay背景 -->
+        <item name="android:windowBackground">@android:color/transparent
+        </item><!--取消window默认背景 不然四角会有黑影-->
+    </style>
+
+    <!-- ActionSheet进出动画 -->
+    <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/common_actionsheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/common_actionsheet_dialog_out</item>
+    </style>
+
+</resources>

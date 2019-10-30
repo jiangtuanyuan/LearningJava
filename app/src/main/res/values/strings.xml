@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">LearningJava</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="app_name">Java专题学习网</string>
+    <string name="tab_text_1">基础知识</string>
+    <string name="tab_text_2">进阶知识</string>
+    <string name="tab_text_3">实例教程</string>
+    <string name="tab_text_4">拓展知识</string>
+    <string name="tab_text_5">作品展示</string>
+    <string name="tab_text_6">相关资源</string>
+    <string name="text_banquan" translatable="false"> "@"版权所有 长沙学院</string>
 </resources>

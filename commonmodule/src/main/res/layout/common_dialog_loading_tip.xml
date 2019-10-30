@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/other_status_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/img_tip_logo"
+            android:layout_width="@dimen/dp_220"
+            android:layout_height="@dimen/dp_220"
+            android:src="@drawable/common_data_empty"
+            android:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/tv_tips"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="暂无数据"
+            android:textColor="@color/common_color_gray_707070"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/bt_operate"
+            android:layout_width="@dimen/dp_95"
+            android:layout_height="@dimen/dp_35"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/common_bg_green_ovl_5"
+            android:gravity="center"
+            android:textColor="@color/common_white"
+            android:textSize="@dimen/sp_10"
+            android:visibility="gone"
+            tools:text="重新尝试" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/loading_progress_layout"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_75"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <com.hd.commonmodule.view.LoadingView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:indeterminateBehavior="repeat" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="加载中..."
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_12" />
+    </LinearLayout>
+</FrameLayout>
