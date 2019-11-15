@@ -11,4 +11,11 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="line_bg_color">#D6D6D6</color>
+    <color name="color_gray_F5F6FA">#F5F6FA</color>
+    <color name="base_color_f6f8f9">#F6F8F9</color>
+    <color name="color_B3">#FFB3B3B3</color>
+    <color name="base_color_eeeeee">#EEEEEE</color>
+    <color name="blue_4169E1">#4169E1</color>
+    <color name="color_fb">#fbfbfb</color>
+    <color name="color_f6">#f6f6f6</color>
 </resources>

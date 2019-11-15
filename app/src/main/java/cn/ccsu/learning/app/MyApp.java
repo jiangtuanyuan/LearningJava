@@ -2,8 +2,11 @@ package cn.ccsu.learning.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Handler;
+import android.widget.ImageView;
 
+import com.lzy.ninegrid.NineGridView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -20,17 +23,23 @@ import java.util.logging.Level;
 
 import cn.ccsu.learning.BuildConfig;
 import cn.ccsu.learning.net.NetInterceptor;
+import cn.ccsu.learning.net.TInterceptor;
 import cn.ccsu.learning.utils.BuglyUtils;
+import cn.ccsu.learning.utils.GlideUtils;
 import okhttp3.OkHttpClient;
 
 public class MyApp extends Application {
     private static Context mContext;
-    public static Handler mFpvHandler;
+    public static Handler mMainHandler;
+
+    public static Handler getmMainHandler() {
+        return mMainHandler;
+    }
 
     @Override
     protected void attachBaseContext(Context paramContext) {
         super.attachBaseContext(paramContext);
-        mFpvHandler = new Handler(getMainLooper());
+        mMainHandler = new Handler(getMainLooper());
     }
 
     @Override
@@ -40,6 +49,7 @@ public class MyApp extends Application {
         initLogger();
         initBugly();
         initOkGo();
+        NineGridView.setImageLoader(new PicassoImageLoader());
     }
 
     public static Context getContext() {
@@ -59,8 +69,8 @@ public class MyApp extends Application {
         mNetInterceptor.setShowResponseLog(BuildConfig.DEBUG);
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .addInterceptor(mNetInterceptor)
-                //.addInterceptor(loggingInterceptor)
+                //.addInterceptor(mNetInterceptor)
+                .addInterceptor(TInterceptor.getInstance())
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
@@ -70,9 +80,10 @@ public class MyApp extends Application {
                 .setOkHttpClient(builder.build())               //建议设置OkHttpClient，不设置将使用默认的
                 .setCacheMode(CacheMode.NO_CACHE)               //全局统一缓存模式，默认不使用缓存，可以不传
                 .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)   //全局统一缓存时间，默认永不过期，可以不传
-                .addCommonHeaders(new HttpHeaders("token", "1123"))
+                .addCommonHeaders(new HttpHeaders("token", User.getInstance().getUserToken()))
                 .setRetryCount(1);
     }
+
 
     /**
      * 初始化Logger
@@ -102,5 +113,21 @@ public class MyApp extends Application {
         /*热更新配置*/
         //BuglyUtils.BuglyHotConfig();
         Bugly.init(mContext, BuildConfig.BUGLY_APP_ID, false);
+    }
+
+
+    /**
+     * Picasso 加载
+     */
+    private class PicassoImageLoader implements NineGridView.ImageLoader {
+        @Override
+        public void onDisplayImage(Context context, ImageView imageView, String url) {
+            GlideUtils.loadImage(context, url, imageView);
+        }
+
+        @Override
+        public Bitmap getCacheImage(String url) {
+            return null;
+        }
     }
 }

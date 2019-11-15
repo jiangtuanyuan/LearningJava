@@ -1,27 +1,21 @@
-package cn.ccsu.learning.ui.main.fragment.java.fragment;
-
+package cn.ccsu.learning.ui.main.fragment.works;
 import android.os.Bundle;
-
 import cn.ccsu.learning.R;
 import cn.ccsu.learning.base.BaseFragment;
-import cn.ccsu.learning.ui.main.fragment.java.JavaFragment;
-
-
-/**
- * 学生作品展示
- */
-public class JavaFragmentWorks extends BaseFragment {
+public class WorksFragment extends BaseFragment {
     private static final String ARG_MSG = "java_works";
-    public static JavaFragmentWorks newInstance(String msg) {
+
+    public static WorksFragment newInstance(String msg) {
         Bundle args = new Bundle();
         args.putString(ARG_MSG, msg);
-        JavaFragmentWorks fragment = new JavaFragmentWorks();
+        WorksFragment fragment = new WorksFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     protected int setLayoutResourceID() {
-        return R.layout.fragment_java_works;
+        return R.layout.fragment_works;
     }
 
     @Override

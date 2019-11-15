@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/main_color"
+    tools:context=".ui.SetIPActivity">
+
+    <include layout="@layout/base_white_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_45"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I   P 设  置 : "
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_ip"
+            android:layout_width="247dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_bg"
+            android:digits="0123456789."
+            android:inputType="number|text"
+            android:maxLength="15"
+            android:padding="6dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@null"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="端 口 设 置 : "
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_port"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_bg"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:maxLength="10"
+            android:padding="6dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@null"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_38"
+        android:layout_margin="@dimen/dp_38"
+        android:background="@color/white"
+        android:text="确  定"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+</LinearLayout>

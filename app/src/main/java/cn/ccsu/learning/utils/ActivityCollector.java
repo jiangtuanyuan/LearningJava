@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.os.Build;
 import android.text.TextUtils;
+
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +41,14 @@ public class ActivityCollector {
         }
         activities.clear();
     }
+
     /**
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     public static Activity currentActivity() {
-        return activities.get(activities.size() -1);
+        return activities.get(activities.size() - 1);
     }
+
     /**
      * 结束指定类名的Activity
      */
@@ -71,9 +76,11 @@ public class ActivityCollector {
             }
         }
     }
+
     /**
      * 判断某个界面是否在前台,返回true，为显示,否则不是
      */
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     public static boolean isForeground(Context context, String className) {
         if (context == null || TextUtils.isEmpty(className))
             return false;

@@ -19,17 +19,12 @@ import java.util.List;
 import butterknife.BindView;
 import cn.ccsu.learning.R;
 import cn.ccsu.learning.base.BaseFragment;
-import cn.ccsu.learning.ui.main.fragment.java.fragment.*;
+import cn.ccsu.learning.ui.main.fragment.java.fragment.JavaFragmentAdvance;
+import cn.ccsu.learning.ui.main.fragment.java.fragment.JavaFragmentBasis;
+import cn.ccsu.learning.ui.main.fragment.java.fragment.JavaFragmentExpand;
+import cn.ccsu.learning.ui.main.fragment.java.fragment.JavaFragmentInstance;
+import cn.ccsu.learning.ui.main.fragment.java.fragment.JavaFragmentResources;
 import cn.ccsu.learning.utils.LogUtil;
-
-/**
- * Description : TaskFragment
- *
- * @author yuanyi
- * @date 2019/9/23/023
- * @describe :任务管理模块
- */
-
 
 public class JavaFragment extends BaseFragment {
     private static final String ARG_MSG = "java_msg";
@@ -44,7 +39,7 @@ public class JavaFragment extends BaseFragment {
     public JavaFragmentAdvance mJavaFragmentAdvance;//进阶知识
     public JavaFragmentInstance mJavaFragmentInstance;//实例教程
     public JavaFragmentExpand mJavaFragmentExpand;//拓展知识
-    public JavaFragmentWorks mJavaFragmentWorks;//学生作品展示
+
     public JavaFragmentResources mJavaFragmentResources;//相关资源
 
     private List<Fragment> mFragmentList = new ArrayList<>();
@@ -76,30 +71,35 @@ public class JavaFragment extends BaseFragment {
         mJavaFragmentBasis = JavaFragmentBasis.newInstance("");
         mJavaFragmentAdvance = JavaFragmentAdvance.newInstance("");
         mJavaFragmentInstance = JavaFragmentInstance.newInstance("");
-        mJavaFragmentWorks = JavaFragmentWorks.newInstance("");
         mJavaFragmentExpand = JavaFragmentExpand.newInstance("");
         mJavaFragmentResources = JavaFragmentResources.newInstance("");
+
         mFragmentList.clear();
+        //基础知识
         mFragmentList.add(mJavaFragmentBasis);
+        //进阶知识
         mFragmentList.add(mJavaFragmentAdvance);
-        mFragmentList.add(mJavaFragmentInstance);
-        mFragmentList.add(mJavaFragmentWorks);
+        //扩展知识
         mFragmentList.add(mJavaFragmentExpand);
+
+        //实例教程
+        mFragmentList.add(mJavaFragmentInstance);
+        //资源下载
         mFragmentList.add(mJavaFragmentResources);
 
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         mDemandAdapter = new DemandAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mDemandAdapter);
-        mViewPager.setOffscreenPageLimit(2);//预加载3个
+        mViewPager.setOffscreenPageLimit(4);//预加载3个
 
         //TabLayout加载viewpager
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.getTabAt(0).setText("基础知识");
         mTabLayout.getTabAt(1).setText("进阶知识");
-        mTabLayout.getTabAt(2).setText("实例教程");
-        mTabLayout.getTabAt(3).setText("拓展知识");
-        mTabLayout.getTabAt(4).setText("作品展示");
-        mTabLayout.getTabAt(5).setText("相关资源");
+        mTabLayout.getTabAt(2).setText("拓展知识");
+
+        mTabLayout.getTabAt(3).setText("实例教程");
+        mTabLayout.getTabAt(4).setText("相关资源");
 
         //监听ViewPager页面的切换
         final TaskVpChangeListener taskVpChangeListener = new TaskVpChangeListener();

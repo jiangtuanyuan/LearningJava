@@ -23,10 +23,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
- * @ClassName: BaseActivity
- * @Description: 基础Activity
- * @Author: yuanyi
- * @Date: 2019/9/23/023 15:03
+ * 基类
  */
 public abstract class BaseActivity extends AppCompatActivity {
     private Toolbar mToolbar;

@@ -28,7 +28,7 @@ public class ToastUtil {
     }
 
     public static void setResultToToast(final String string) {
-        MyApp.mFpvHandler.post(new Runnable() {
+        MyApp.getmMainHandler().post(new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(MyApp.getContext(), string + "", Toast.LENGTH_LONG).show();

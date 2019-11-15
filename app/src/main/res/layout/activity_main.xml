@@ -4,7 +4,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <!--使用FrameLayout当做盛放Fragment对象的容器-->
     <FrameLayout
         android:id="@+id/framelayout"
         android:layout_width="match_parent"
@@ -36,6 +35,34 @@
             android:paddingLeft="0dp"
             android:text="专题学习"
             android:checked="true"
+            android:textColor="@drawable/selector_tab_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/radio_works"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_tab_works"
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:text="作品展示"
+            android:textColor="@drawable/selector_tab_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/radio_test"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_tab_test"
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:text="在线测试"
             android:textColor="@drawable/selector_tab_text"
             android:textSize="12sp" />
 
