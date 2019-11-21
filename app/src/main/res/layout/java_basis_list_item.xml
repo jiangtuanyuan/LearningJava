@@ -22,20 +22,22 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_resTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Java 简介"
+                android:text="@string/common_loading"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_15" />
 
             <TextView
+                android:id="@+id/tv_resContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_4"
                 android:textColor="@color/common_color_gray_484848"
                 android:textSize="@dimen/sp_10"
                 android:singleLine="true"
-                android:text="Java是由Sun Microsystems公司于1995年5月推出的Java面向对象程序设计语言和Java平台的总称.." />
+                android:text="@string/common_loading" />
 
 
             <LinearLayout
@@ -45,16 +47,18 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_userName"
                     android:layout_width="@dimen/dp_100"
                     android:layout_height="wrap_content"
-                    android:text="创建者:管理员"
+                    android:text="创建者:加载中.."
                     android:textColor="@color/common_color_gray_484848"
                     android:textSize="@dimen/sp_10" />
 
                 <TextView
+                    android:id="@+id/tv_createTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="时间:2019-10-31 17:24"
+                    android:text="时间:加载中.."
                     android:layout_weight="1"
                     android:gravity="right"
                     android:textColor="@color/common_color_gray_484848"

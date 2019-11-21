@@ -114,19 +114,18 @@ public class RegisterActivity extends BaseActivity {
 
     private void Register() {
         Map<String, Object> httpParams = new HashMap<>();
-
-        httpParams.put("userName", etUserName.getText().toString());
-        httpParams.put("userPassword", etUserPwd1.getText().toString());
-
-        //httpParams.put("userRealname", etUserPwd1.getText().toString());
+        Students students = new Students();
+        students.setUserName(etUserName.getText().toString());
+        students.setUserPassword(etUserPwd1.getText().toString());
         if (rbSexNv.isChecked()) {
-            httpParams.put("userSex", "女");
+            students.setUserSex("女");
         } else {
-            httpParams.put("userSex", "男");
+            students.setUserSex("男");
         }
-
-        httpParams.put("userSubordinate", etUserSchool.getText().toString());
-        httpParams.put("userTel", etUserTel.getText().toString());
+        students.setUserSubordinate(etUserSchool.getText().toString());
+        students.setUserTel(etUserTel.getText().toString());
+        httpParams.put("type", "1");//学生
+        httpParams.put("mesUser",students);
 
         Gson gson = new Gson();
         String str = gson.toJson(httpParams);
@@ -167,6 +166,54 @@ public class RegisterActivity extends BaseActivity {
                 ToastUtil.showToast(info);
             }
         });
+    }
+
+    public class Students {
+        private String userName;
+        private String userPassword;
+        private String userSex;
+        private String userSubordinate;
+        private String userTel;
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public String getUserPassword() {
+            return userPassword;
+        }
+
+        public void setUserPassword(String userPassword) {
+            this.userPassword = userPassword;
+        }
+
+        public String getUserSex() {
+            return userSex;
+        }
+
+        public void setUserSex(String userSex) {
+            this.userSex = userSex;
+        }
+
+        public String getUserSubordinate() {
+            return userSubordinate;
+        }
+
+        public void setUserSubordinate(String userSubordinate) {
+            this.userSubordinate = userSubordinate;
+        }
+
+        public String getUserTel() {
+            return userTel;
+        }
+
+        public void setUserTel(String userTel) {
+            this.userTel = userTel;
+        }
     }
 
 }

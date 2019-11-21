@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/color_gray_F5F6FA"
+    tools:context=".ui.main.fragment.mine.user.UserManageActivity">
+
+    <include layout="@layout/base_white_toolbar" />
+
+
+    <RadioGroup
+        android:id="@+id/rg_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_6"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dp_2">
+
+        <RadioButton
+            android:id="@+id/rb_studio"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_35"
+            android:background="@drawable/shape_sett_left_text_bg"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="学生"
+            android:textColor="@drawable/selector_sett_text_color"
+            android:textSize="@dimen/sp_12" />
+
+        <RadioButton
+            android:id="@+id/rb_teacher"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_35"
+            android:background="@drawable/shape_sett_right_text_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="老师"
+            android:textColor="@drawable/selector_sett_text_color"
+            android:textSize="@dimen/sp_12" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/shaper_white_line"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/search_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:clickable="false"
+            android:gravity="center_vertical"
+            android:hint="搜索用户名"
+            android:maxLength="20"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/search_edt_clear"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/ic_close_gary"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/search_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:src="@mipmap/ic_search" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_centerInParent="true"
+            android:indeterminateBehavior="repeat" />
+
+        <ImageView
+            android:id="@+id/pager_empty_iv"
+            android:layout_width="@dimen/dp_140"
+            android:layout_height="@dimen/dp_140"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:src="@drawable/bg_no_data_image" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_add_teacher"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_30"
+            android:visibility="gone"
+            android:background="@drawable/ic_add_pink" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

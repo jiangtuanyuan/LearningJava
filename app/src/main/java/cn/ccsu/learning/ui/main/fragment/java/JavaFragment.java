@@ -39,7 +39,6 @@ public class JavaFragment extends BaseFragment {
     public JavaFragmentAdvance mJavaFragmentAdvance;//进阶知识
     public JavaFragmentInstance mJavaFragmentInstance;//实例教程
     public JavaFragmentExpand mJavaFragmentExpand;//拓展知识
-
     public JavaFragmentResources mJavaFragmentResources;//相关资源
 
     private List<Fragment> mFragmentList = new ArrayList<>();

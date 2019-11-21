@@ -84,12 +84,12 @@ public class NetUtil {
                                     int code = jsonObject.optInt("code");
                                     String info = jsonObject.optString("info");
                                     String data = jsonObject.optString("data");
-                                    if (code == NetResultCode.CODE10000.getCode()) {
+                                    if (code == NetResultCode.CODE200.getCode()) {
                                         if (dataListener != null) {
                                             dataListener.onSuccess(info, data);
                                         }
                                     } else {
-                                        ToastUtil.showToast(NetResultCode.getCode(code).getDesc());
+                                        ToastUtil.showToast(jsonObject.optString("info"));
                                         if (dataListener != null) {
                                             dataListener.onFaild();
                                         }
@@ -176,6 +176,7 @@ public class NetUtil {
                             if (stringResponse.isSuccessful()) {
                                 String s = stringResponse.body();
                                 LogUtil.e("请求信息", s);
+                                Logger.json(s);
                                 if (s != null) {
                                     JSONObject jsonObject = new JSONObject(s);
                                     int code = jsonObject.optInt("code");

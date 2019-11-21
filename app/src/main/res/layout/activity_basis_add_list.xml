@@ -59,6 +59,7 @@
                         android:id="@+id/iv_title_close"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="invisible"
                         app:srcCompat="@drawable/ic_close_black_24dp"
                         tools:ignore="VectorDrawableCompat" />
 
@@ -69,7 +70,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_200"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/dp_20"
@@ -79,18 +80,19 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/et_content"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_marginRight="@dimen/dp_10"
                         android:layout_weight="1"
                         android:background="@color/transparent"
                         android:hint="内容~"
+                        android:inputType="textMultiLine"
                         android:gravity="top|left"
                         android:textSize="@dimen/sp_13" />
 
@@ -99,6 +101,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_close_black_24dp"
+                        android:visibility="invisible"
                         tools:ignore="VectorDrawableCompat" />
 
                 </LinearLayout>
@@ -153,7 +156,7 @@
                 <TextView
                     android:id="@+id/tv_add_attachment"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_30"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_34"
                     android:text="点击上传附件"
                     android:gravity="center_vertical"
@@ -166,12 +169,12 @@
 
 
             <Button
-                android:id="@+id/bt_login"
+                android:id="@+id/bt_add"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_38"
                 android:layout_margin="@dimen/dp_40"
                 android:background="@drawable/dialog_fly_shape_ok"
-                android:text="发 布"
+                android:text="新 增"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_14" />
         </LinearLayout>

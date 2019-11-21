@@ -12,6 +12,7 @@ import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 
 import cn.ccsu.learning.utils.LogUtil;
+import cn.ccsu.learning.utils.ToastUtil;
 import okhttp3.Connection;
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -77,7 +78,7 @@ public class TInterceptor implements Interceptor {
         } catch (Exception e) {
             LogUtil.e(TAG, " HTTP FAILED: " + e);
             netIsOk = false;
-//            ToastUtils.showToast(UIUtils.getResources().getString(R.string.net_error));
+            //ToastUtil.showToast("咦,无法连接到无法连接到网络!");
             throw e;
         }
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);

@@ -72,8 +72,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-        Beta.checkUpgrade(false, true);
         checkPermissions();
+        Beta.checkUpgrade(false, true);
         initView();
     }
 
@@ -98,7 +98,9 @@ public class MainActivity extends BaseActivity {
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.INTERNET,
                 Manifest.permission.CAMERA,
-                Manifest.permission.ACCESS_NETWORK_STATE)
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.REQUEST_INSTALL_PACKAGES)
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {

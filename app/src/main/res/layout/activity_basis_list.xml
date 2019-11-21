@@ -13,45 +13,23 @@
         android:layout_height="@dimen/dp_1"
         android:background="@color/line_bg_color" />
 
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/tv_no_data"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="@dimen/sp_12"
-                android:visibility="visible"
-                android:layout_centerInParent="true"
-                android:text="咦~这里什么都没有耶~" />
+        <include layout="@layout/recycler_smart" />
 
 
-            <ImageView
-                android:id="@+id/iv_add"
-                android:layout_width="@dimen/dp_35"
-                android:layout_height="@dimen/dp_35"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/dp_40"
-                android:layout_marginRight="@dimen/dp_30"
-                android:background="@drawable/ic_add_pink" />
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/iv_add"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_30"
+            android:background="@drawable/ic_add_pink" />
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </RelativeLayout>
+
 </LinearLayout>

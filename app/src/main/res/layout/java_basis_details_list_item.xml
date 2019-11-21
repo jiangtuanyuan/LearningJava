@@ -24,9 +24,10 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_resTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="java 语法介绍"
+                android:text="@string/common_loading"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_15" />
 
@@ -37,16 +38,18 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_userName"
                     android:layout_width="@dimen/dp_100"
                     android:layout_height="wrap_content"
-                    android:text="上传者:管理员"
+                    android:text="@string/common_loading"
                     android:textColor="@color/common_color_gray_484848"
                     android:textSize="@dimen/sp_10" />
 
                 <TextView
+                    android:id="@+id/tv_createTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="时间:2019-10-31 17:24"
+                    android:text="时间:0000-00-00 00:00"
                     android:layout_weight="1"
                     android:gravity="right"
                     android:textColor="@color/common_color_gray_484848"

@@ -9,6 +9,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:name=".app.MyApp"
@@ -20,7 +26,48 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.SetIPActivity"></activity>
+        <activity
+            android:name=".ui.web.WebViewActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.fragment.mine.download.MyDownloadActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.fragment.mine.logs.MyLogActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.fragment.mine.res.TeacherResActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.fragment.java.fragment.basis.UpdateDataActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".ui.main.fragment.mine.user.AddTeacherActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.fragment.mine.user.UserManageActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".ui.main.fragment.test.TestDetailsActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.fragment.java.fragment.basis.ShowImagesActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.SetIPActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main.fragment.java.fragment.basis.BasisDetailsActivity"
             android:configChanges="orientation|screenSize"
@@ -69,6 +116,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
         <activity
             android:name=".ui.main.MainActivity"
             android:configChanges="orientation|screenSize"

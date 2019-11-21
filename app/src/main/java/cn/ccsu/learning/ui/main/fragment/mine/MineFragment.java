@@ -12,6 +12,13 @@ import butterknife.OnClick;
 import cn.ccsu.learning.R;
 import cn.ccsu.learning.app.User;
 import cn.ccsu.learning.base.BaseFragment;
+import cn.ccsu.learning.db.DataDBUtils;
+import cn.ccsu.learning.ui.main.fragment.mine.download.MyDownloadActivity;
+import cn.ccsu.learning.ui.main.fragment.mine.logs.MyLogActivity;
+import cn.ccsu.learning.ui.main.fragment.mine.res.TeacherResActivity;
+import cn.ccsu.learning.ui.main.fragment.mine.user.UserManageActivity;
+import cn.ccsu.learning.utils.LogUtil;
+import cn.ccsu.learning.utils.ToastUtil;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MineFragment extends BaseFragment {
@@ -36,6 +43,10 @@ public class MineFragment extends BaseFragment {
     RelativeLayout rlUserLayout;
     @BindView(R.id.tv_version)
     TextView tvVersion;
+    @BindView(R.id.tv_user_name)
+    TextView tvUserName;
+    @BindView(R.id.tv_user_shcool)
+    TextView tvUserShcool;
 
     public static MineFragment newInstance(String msg) {
         Bundle args = new Bundle();
@@ -52,16 +63,19 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void setFragmentData() {
-        /*switch (User.getInstance().getmUserType()) {
-            case ADMIN://管理员
+        tvUserName.setText(User.getInstance().getUserName());
+        tvUserShcool.setText(User.getInstance().getUserSubordinate());
+        switch (User.getInstance().getRid()) {
+            case "3"://管理员
                 rlRecordLayout.setVisibility(View.GONE);
                 rlDownloadLayout.setVisibility(View.GONE);
+
 
                 rlUploadLayout.setVisibility(View.VISIBLE);
                 rlUserLayout.setVisibility(View.VISIBLE);
                 tvUserTypeName.setText("管理员");
                 break;
-            case TEACHER://老师
+            case "2"://老师
                 rlUserLayout.setVisibility(View.GONE);
                 rlRecordLayout.setVisibility(View.GONE);
 
@@ -69,7 +83,7 @@ public class MineFragment extends BaseFragment {
                 rlUploadLayout.setVisibility(View.VISIBLE);
                 tvUserTypeName.setText("老师");
                 break;
-            case STUDENTS://学生
+            case "1"://学生
                 rlUserLayout.setVisibility(View.GONE);
                 rlUploadLayout.setVisibility(View.GONE);
 
@@ -79,7 +93,7 @@ public class MineFragment extends BaseFragment {
                 break;
             default:
                 break;
-        }*/
+        }
 
     }
 
@@ -89,13 +103,18 @@ public class MineFragment extends BaseFragment {
             case R.id.mine_person_data_layout:
                 MineDetilsActivity.actionStart(getContext());
                 break;
-            case R.id.rl_record_layout:
+            case R.id.rl_record_layout://浏览记录
+                //LogUtil.e("浏览记录", DataDBUtils.getUserShowLogsAll(User.getInstance().getUserId()).size() + "");
+                MyLogActivity.actionStart(getActivity());
                 break;
-            case R.id.rl_upload_layout:
+            case R.id.rl_upload_layout://我的资源
+                TeacherResActivity.actionStart(getActivity());
                 break;
             case R.id.rl_download_layout:
+                MyDownloadActivity.actionStart(getActivity());
                 break;
             case R.id.rl_user_layout:
+                UserManageActivity.actionStart(getContext());
                 break;
             default:
                 break;

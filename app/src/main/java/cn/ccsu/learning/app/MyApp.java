@@ -2,11 +2,8 @@ package cn.ccsu.learning.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Handler;
-import android.widget.ImageView;
 
-import com.lzy.ninegrid.NineGridView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -18,6 +15,8 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.tencent.bugly.Bugly;
 
+import org.litepal.LitePal;
+
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -25,7 +24,6 @@ import cn.ccsu.learning.BuildConfig;
 import cn.ccsu.learning.net.NetInterceptor;
 import cn.ccsu.learning.net.TInterceptor;
 import cn.ccsu.learning.utils.BuglyUtils;
-import cn.ccsu.learning.utils.GlideUtils;
 import okhttp3.OkHttpClient;
 
 public class MyApp extends Application {
@@ -40,6 +38,7 @@ public class MyApp extends Application {
     protected void attachBaseContext(Context paramContext) {
         super.attachBaseContext(paramContext);
         mMainHandler = new Handler(getMainLooper());
+        LitePal.initialize(this);
     }
 
     @Override
@@ -49,7 +48,6 @@ public class MyApp extends Application {
         initLogger();
         initBugly();
         initOkGo();
-        NineGridView.setImageLoader(new PicassoImageLoader());
     }
 
     public static Context getContext() {
@@ -60,7 +58,7 @@ public class MyApp extends Application {
      * 初始化Okgo
      */
     private void initOkGo() {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("网络监听");
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("请求监听");
         loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
         loggingInterceptor.setColorLevel(Level.INFO);
 
@@ -113,21 +111,5 @@ public class MyApp extends Application {
         /*热更新配置*/
         //BuglyUtils.BuglyHotConfig();
         Bugly.init(mContext, BuildConfig.BUGLY_APP_ID, false);
-    }
-
-
-    /**
-     * Picasso 加载
-     */
-    private class PicassoImageLoader implements NineGridView.ImageLoader {
-        @Override
-        public void onDisplayImage(Context context, ImageView imageView, String url) {
-            GlideUtils.loadImage(context, url, imageView);
-        }
-
-        @Override
-        public Bitmap getCacheImage(String url) {
-            return null;
-        }
     }
 }

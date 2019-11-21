@@ -3,90 +3,137 @@ package cn.ccsu.learning.entity;
 public class UserBean {
 
     /**
-     * userId : 59bfaff0bb104d22b17eefd4766baf50
-     * userName : 湘西猎人
-     * userPassword : 25f9e794323b453885f5181f1b624d0b
-     * userRealname : 蒋团媛
-     * userSex : 女
-     * userSubordinate : 呵呵呵呵
-     * userTel : 77889955
-     * userEmail :
+     * role : {"rid":"2","rname":"teacher"}
+     * mesUser : {"userId":"656a76f469604d868a29048255f19848","userName":"teacher","userPassword":"25f9e794323b453885f5181f1b624d0b","userRealname":"蒋团媛","userSex":"女","userSubordinate":"呵呵呵呵","userTel":"77889955","userEmail":""}
      */
+    private RoleBean role;
+    private MesUserBean mesUser;
 
-    private String userId;
-    private String userName;
-    private String userPassword;
-    private String userRealname;
-    private String userSex;
-    private String userSubordinate;
-    private String userTel;
-    private String userEmail;
-
-    public UserBean() {
-
+    public RoleBean getRole() {
+        return role;
     }
 
-    public String getUserId() {
-        return userId;
+    public void setRole(RoleBean role) {
+        this.role = role;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public MesUserBean getMesUser() {
+        return mesUser;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setMesUser(MesUserBean mesUser) {
+        this.mesUser = mesUser;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public static class RoleBean {
+        /**
+         * rid : 2
+         * rname : teacher
+         */
+
+        private String rid;
+        private String rname;
+
+        public String getRid() {
+            return rid;
+        }
+
+        public void setRid(String rid) {
+            this.rid = rid;
+        }
+
+        public String getRname() {
+            return rname;
+        }
+
+        public void setRname(String rname) {
+            this.rname = rname;
+        }
     }
 
-    public String getUserPassword() {
-        return userPassword;
-    }
+    public static class MesUserBean {
+        /**
+         * userId : 656a76f469604d868a29048255f19848
+         * userName : teacher
+         * userPassword : 25f9e794323b453885f5181f1b624d0b
+         * userRealname : 蒋团媛
+         * userSex : 女
+         * userSubordinate : 呵呵呵呵
+         * userTel : 77889955
+         * userEmail :
+         */
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
+        private String userId;
+        private String userName;
+        private String userPassword;
+        private String userRealname;
+        private String userSex;
+        private String userSubordinate;
+        private String userTel;
+        private String userEmail;
 
-    public String getUserRealname() {
-        return userRealname;
-    }
+        public String getUserId() {
+            return userId;
+        }
 
-    public void setUserRealname(String userRealname) {
-        this.userRealname = userRealname;
-    }
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
 
-    public String getUserSex() {
-        return userSex;
-    }
+        public String getUserName() {
+            return userName;
+        }
 
-    public void setUserSex(String userSex) {
-        this.userSex = userSex;
-    }
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
 
-    public String getUserSubordinate() {
-        return userSubordinate;
-    }
+        public String getUserPassword() {
+            return userPassword;
+        }
 
-    public void setUserSubordinate(String userSubordinate) {
-        this.userSubordinate = userSubordinate;
-    }
+        public void setUserPassword(String userPassword) {
+            this.userPassword = userPassword;
+        }
 
-    public String getUserTel() {
-        return userTel;
-    }
+        public String getUserRealname() {
+            return userRealname;
+        }
 
-    public void setUserTel(String userTel) {
-        this.userTel = userTel;
-    }
+        public void setUserRealname(String userRealname) {
+            this.userRealname = userRealname;
+        }
 
-    public String getUserEmail() {
-        return userEmail;
-    }
+        public String getUserSex() {
+            return userSex;
+        }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+        public void setUserSex(String userSex) {
+            this.userSex = userSex;
+        }
+
+        public String getUserSubordinate() {
+            return userSubordinate;
+        }
+
+        public void setUserSubordinate(String userSubordinate) {
+            this.userSubordinate = userSubordinate;
+        }
+
+        public String getUserTel() {
+            return userTel;
+        }
+
+        public void setUserTel(String userTel) {
+            this.userTel = userTel;
+        }
+
+        public String getUserEmail() {
+            return userEmail;
+        }
+
+        public void setUserEmail(String userEmail) {
+            this.userEmail = userEmail;
+        }
     }
 }

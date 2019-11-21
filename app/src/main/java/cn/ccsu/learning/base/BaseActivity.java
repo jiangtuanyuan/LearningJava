@@ -30,6 +30,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     private KProgressHUD kProgressHUD;
     private CompositeDisposable mCompositeDisposable;//Rxjava订阅
 
+    //自己修改
+    public int pageNum = 0;//分页要查询的数据当前页码，默认为1
+    public String pageSize = "10";//分页每页查询的数据量，默认10
+
+    public String mIdStr = "mId";
+    public String pIdStr = "pId";
+    public String pageNumStr = "pageNum";
+    public String pageSizeStr = "pageSize";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_8"
+    app:cardCornerRadius="@dimen/dp_4"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_8"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="(1) java是什么?" />
+
+
+        <RadioGroup
+            android:id="@+id/rg_abcd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawablePadding="@dimen/dp_4"
+                android:layout_margin="@dimen/dp_10"
+                android:drawableLeft="@drawable/selector_login_user_type"
+                android:text="A 就是JAVA" />
+
+            <RadioButton
+                android:id="@+id/rb_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawablePadding="@dimen/dp_4"
+                android:layout_margin="@dimen/dp_10"
+                android:drawableLeft="@drawable/selector_login_user_type"
+                android:text="B 就是JAVA" />
+
+            <RadioButton
+                android:id="@+id/rb_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawablePadding="@dimen/dp_4"
+                android:layout_margin="@dimen/dp_10"
+                android:drawableLeft="@drawable/selector_login_user_type"
+                android:text="C 就是JAVA" />
+
+            <RadioButton
+                android:id="@+id/rb_d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawablePadding="@dimen/dp_4"
+                android:layout_margin="@dimen/dp_10"
+                android:drawableLeft="@drawable/selector_login_user_type"
+                android:text="D 就是JAVA" />
+
+        </RadioGroup>
+
+
+        <RadioGroup
+            android:id="@+id/rg_true_false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawablePadding="@dimen/dp_4"
+                android:layout_margin="@dimen/dp_10"
+                android:drawableLeft="@drawable/selector_login_user_type"
+                android:text="对" />
+
+            <RadioButton
+                android:id="@+id/rb_false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawablePadding="@dimen/dp_4"
+                android:layout_margin="@dimen/dp_10"
+                android:drawableLeft="@drawable/selector_login_user_type"
+                android:text="错" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tv_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="正确答案: A" />
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

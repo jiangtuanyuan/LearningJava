@@ -17,21 +17,29 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.lzy.okgo.model.HttpParams;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ccsu.learning.R;
 import cn.ccsu.learning.app.MyApp;
+import cn.ccsu.learning.app.User;
 import cn.ccsu.learning.base.BaseActivity;
 import cn.ccsu.learning.custom.CustomDialog;
+import cn.ccsu.learning.net.NetApi;
+import cn.ccsu.learning.net.NetUtil;
 import cn.ccsu.learning.ui.login.LoginActivity;
+import cn.ccsu.learning.ui.main.fragment.mine.download.MyDownLoadBean;
 import cn.ccsu.learning.utils.ActivityCollector;
 import cn.ccsu.learning.utils.ETChangedUtlis;
 import cn.ccsu.learning.utils.GlideUtils;
@@ -41,6 +49,9 @@ import cn.ccsu.learning.utils.SPUtil;
 import cn.ccsu.learning.utils.ToastUtil;
 import cn.ccsu.learning.utils.Validator;
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.disposables.Disposable;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 个人资料详情
@@ -89,6 +100,9 @@ public class MineDetilsActivity extends BaseActivity {
     protected void initViews(Bundle savedInstanceState) {
         initToolbarBlackNav();
         setToolbarTitle("个人资料");
+        tvName.setText(User.getInstance().getUserName());
+        tvSchoolName.setText(User.getInstance().getUserSubordinate());
+
     }
 
 
@@ -103,16 +117,16 @@ public class MineDetilsActivity extends BaseActivity {
                         .imageSpanCount(4)// 每行显示个数 int
                         .forResult(PictureConfig.CHOOSE_REQUEST);
                 break;
-            case R.id.ll_name_layout:
+            case R.id.ll_name_layout://昵称
                 showUpdateUserNameDialog();
                 break;
-            case R.id.ll_pwd_layout:
+            case R.id.ll_pwd_layout://密码
                 showUpdatePWdDialog();
                 break;
-            case R.id.ll_school_layout:
+            case R.id.ll_school_layout://学校
                 showUpdateSchoolNameDialog();
                 break;
-            case R.id.bt_exit_login:
+            case R.id.bt_exit_login://退出
                 isExitLogin();
                 break;
             default:
@@ -164,7 +178,7 @@ public class MineDetilsActivity extends BaseActivity {
         ETChangedUtlis.EditTextChangedListener(etPassword, checkShow);
         ETChangedUtlis.EditTextChangedListener(etNewPassword, checkNewShow);
         ETChangedUtlis.EditTextChangedListener(etRePassword, checkReShow);
-        Dialog pwddialog= new AlertDialog.Builder(this)
+        Dialog pwddialog = new AlertDialog.Builder(this)
                 .setView(LinOvershootView)
                 .setPositiveButton("确定", (dialog, id) -> {
                     jpwd = etPassword.getText().toString();//旧密码
@@ -224,11 +238,17 @@ public class MineDetilsActivity extends BaseActivity {
     private void showUpdateSchoolNameDialog() {
         LinearLayout LinOvershootView = (LinearLayout) getLayoutInflater().inflate(R.layout.dialog_update_user_school, null);
         final EditText etUserSchool = LinOvershootView.findViewById(R.id.et_user_school);
+        etUserSchool.setText(User.getInstance().getUserSubordinate());
         Dialog scooldialog = new AlertDialog.Builder(this)
                 .setView(LinOvershootView)
                 .setPositiveButton("确定", (dialog, id) -> {
-                    ToastUtil.showToast("学校:" + etUserSchool.getText().toString());
-                    IOSDialogUtils.NoCosleDialog(dialog, false);
+                    if (TextUtils.isEmpty(etUserSchool.getText().toString())) {
+                        ToastUtil.showToast("学校不能为空!");
+                        IOSDialogUtils.NoCosleDialog(dialog, false);
+                    } else {
+                        updateSchool(etUserSchool.getText().toString());
+                        IOSDialogUtils.NoCosleDialog(dialog, true);
+                    }
                 })
                 .setNegativeButton("取消", (dialog, id) -> IOSDialogUtils.NoCosleDialog(dialog, true))
                 .setCancelable(true)
@@ -237,6 +257,50 @@ public class MineDetilsActivity extends BaseActivity {
         window.setWindowAnimations(R.style.BaseDialogWindowStyle);
         scooldialog.setCancelable(false);
         scooldialog.show();
+    }
+
+    private void updateSchool(String SchoolName) {
+        Map<String, Object> httpParams = new HashMap();
+        httpParams.put("userId", User.getInstance().getUserId());
+        httpParams.put("userSubordinate", SchoolName);
+        httpParams.put("userTel", User.getInstance().getUserTel());
+        httpParams.put("userEmail", User.getInstance().getUserEmail());
+        Gson gson = new Gson();
+        String jsonstr = gson.toJson(httpParams);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonstr);
+        NetUtil mNetUtil = new NetUtil();
+        mNetUtil.postJsonNetData(NetApi.USER_INFOS_UPDATE, requestBody, new NetUtil.DataListener() {
+            @Override
+            public void showDialogLoading() {
+                showProgressDialog("修改,请稍后..", true);
+            }
+
+            @Override
+            public void onSubScribe(Disposable d) {
+                addDisposable(d);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                closeProgressDialog();
+            }
+
+            @Override
+            public void onFaild() {
+                closeProgressDialog();
+            }
+
+            @Override
+            public void dissDialogmissLoad() {
+                closeProgressDialog();
+            }
+
+            @Override
+            public void onSuccess(String info, String data) {
+                ToastUtil.showToast(info);
+                tvSchoolName.setText(SchoolName);
+            }
+        });
     }
 
 
@@ -303,8 +367,7 @@ public class MineDetilsActivity extends BaseActivity {
             @Override
             public void onPositiveButtonClick(CustomDialog dialog) {
                 dialog.dismiss();
-                ActivityCollector.finishAll();
-                LoginActivity.actionStart(MyApp.getContext());
+                logout();
             }
 
             @Override
@@ -313,6 +376,53 @@ public class MineDetilsActivity extends BaseActivity {
             }
         });
         IOSDialogUtils.getInstance().showDialogIOS(this, iosDialogBean);
+    }
+
+    /**
+     * 退出登录
+     */
+    private void logout() {
+        NetUtil mNetUtil = new NetUtil();
+        mNetUtil.getNetData(NetApi.USER_LOGOUT, new HttpParams(), new NetUtil.DataListener() {
+            @Override
+            public void showDialogLoading() {
+                showProgressDialog("退出中..");
+            }
+
+            @Override
+            public void onSubScribe(Disposable d) {
+                addDisposable(d);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                closeProgressDialog();
+
+            }
+
+            @Override
+            public void onFaild() {
+                closeProgressDialog();
+            }
+
+            @Override
+            public void dissDialogmissLoad() {
+                closeProgressDialog();
+            }
+
+            @Override
+            public void onSuccess(String info, String data) {
+                closeProgressDialog();
+                ToastUtil.showToast(info);
+
+                User.getInstance().clerUserInfos();
+                ActivityCollector.finishAll();
+                LoginActivity.actionStart(MyApp.getContext());
+                System.exit(0);
+                //ActivityCollector.finishAll();
+                //LoginActivity.actionStart(MyApp.getContext());
+            }
+        });
     }
 
 }

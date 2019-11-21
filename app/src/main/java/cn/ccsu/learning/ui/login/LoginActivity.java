@@ -36,8 +36,10 @@ import cn.ccsu.learning.net.NetResultCode;
 import cn.ccsu.learning.ui.SetIPActivity;
 import cn.ccsu.learning.ui.main.MainActivity;
 import cn.ccsu.learning.ui.register.RegisterActivity;
+import cn.ccsu.learning.utils.Constant;
 import cn.ccsu.learning.utils.ETChangedUtlis;
 import cn.ccsu.learning.utils.LogUtil;
+import cn.ccsu.learning.utils.SPUtil;
 import cn.ccsu.learning.utils.ToastUtil;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -87,6 +89,10 @@ public class LoginActivity extends BaseActivity {
         Beta.checkUpgrade(false, true);
         ETChangedUtlis.EditTextChangedListener(etUserName, ivUserNameCler);
         ETChangedUtlis.EditTextChangedListener(etUserPwd, cbUserPwdSh);
+
+        etUserName.setText(SPUtil.getInstance().getString(SPUtil.USER_NAME));
+        etUserPwd.setText(SPUtil.getInstance().getString(SPUtil.USER_PWD));
+
     }
 
     @OnClick({R.id.iv_head_image, R.id.tv_register, R.id.rb_type_students, R.id.rb_type_teacher, R.id.rb_type_admin, R.id.bt_login})
@@ -155,13 +161,16 @@ public class LoginActivity extends BaseActivity {
                                 Logger.json(s);
                                 if (!TextUtils.isEmpty(s)) {
                                     JSONObject jsonObject = new JSONObject(s);
-                                    int code = jsonObject.optInt("code");
-                                    String info = jsonObject.optString("info");
-                                    String data = jsonObject.optString("data");
+                                    int code = jsonObject.optInt(Constant.CODE);
+                                    String info = jsonObject.optString(Constant.INFO);
+                                    String data = jsonObject.optString(Constant.DATA);
                                     if (code == NetResultCode.CODE200.getCode()) {
                                         UserBean userBean = FastJsonUtils.toBean(data, UserBean.class);
                                         if (userBean != null) {
+                                            SPUtil.getInstance().putString(SPUtil.USER_NAME, loginName);
+                                            SPUtil.getInstance().putString(SPUtil.USER_PWD, loginPwd);
                                             User.getInstance().savaUserData(userBean);
+
                                             String token = stringResponse.headers().get("Token");
                                             if (!TextUtils.isEmpty(token)) {
                                                 User.getInstance().savaToken(token);

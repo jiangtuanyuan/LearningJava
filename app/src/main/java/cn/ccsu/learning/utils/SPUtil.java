@@ -129,5 +129,7 @@ public class SPUtil {
     public static final String PORT = "port";//服务器端口
     //key
     public static String TOKEN = "user_token";
+
+    public static String USER_NAME = "user_name";
     public static String USER_PWD = "user_pwd";
 }

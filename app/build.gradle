@@ -24,8 +24,8 @@ android {
         applicationId "cn.ccsu.learning"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1." + versionCode
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -123,7 +123,12 @@ dependencies {
     implementation 'com.droidninja:filepicker:2.1.5'
     implementation project(path: ':commonmodule')
     //九宫格
-    implementation 'com.lzy.widget:ninegridview:0.2.0'
+    implementation 'com.jaeger.ninegridimageview:library:1.1.1'
+    //图片缩放框架
+    implementation 'com.bm.photoview:library:1.4.1'
+    /*Litepay*/
+    implementation 'org.litepal.android:java:3.0.0'
+
 }
 // 获取打包时间
 def getYMD() {

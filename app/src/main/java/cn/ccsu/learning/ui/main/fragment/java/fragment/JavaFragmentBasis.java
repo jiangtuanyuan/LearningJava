@@ -16,7 +16,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.hd.commonmodule.chad.library.adapter.base.BaseQuickAdapter;
+import com.hd.commonmodule.utils.FastJsonUtils;
 import com.hd.commonmodule.utils.ThreadPoolProxyFactory;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -29,20 +31,30 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ccsu.learning.R;
 import cn.ccsu.learning.app.MyApp;
+import cn.ccsu.learning.app.User;
+import cn.ccsu.learning.net.NetApi;
+import cn.ccsu.learning.net.NetResultCode;
+import cn.ccsu.learning.net.NetUtil;
 import cn.ccsu.learning.ui.main.fragment.java.adapter.BasisListAdapter;
 import cn.ccsu.learning.ui.main.fragment.java.base.JavaBaseFragment;
 import cn.ccsu.learning.ui.main.fragment.java.base.LoadingPager;
 import cn.ccsu.learning.ui.main.fragment.java.bean.BasisBean;
 import cn.ccsu.learning.ui.main.fragment.java.fragment.basis.BasisListActivity;
+import cn.ccsu.learning.utils.Constant;
 import cn.ccsu.learning.utils.IOSDialogUtils;
 import cn.ccsu.learning.utils.ToastUtil;
+import io.reactivex.disposables.Disposable;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
@@ -58,7 +70,10 @@ public class JavaFragmentBasis extends JavaBaseFragment implements OnRefreshList
     @BindView(R.id.iv_add)
     ImageView ivAdd;
     private BasisListAdapter mBasisListAdapter;
-    private List<BasisBean> mSumList = new ArrayList<>();
+
+
+    private List<BasisBean.ListsBean> mSumList = new ArrayList<>();
+    private BasisBean mBasisBean;
 
     public static JavaFragmentBasis newInstance(String msg) {
         Bundle args = new Bundle();
@@ -68,9 +83,18 @@ public class JavaFragmentBasis extends JavaBaseFragment implements OnRefreshList
         return fragment;
     }
 
+    public static JavaFragmentBasis newInstance(boolean isteacher) {
+        Bundle args = new Bundle();
+        args.putBoolean("isteacher", isteacher);//是否是教师
+        JavaFragmentBasis fragment = new JavaFragmentBasis();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public LoadingPager.LoadedResult initData() {
         try {
+            getData(true);
             return checkResultData(mSumList);
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,21 +114,40 @@ public class JavaFragmentBasis extends JavaBaseFragment implements OnRefreshList
         mBasisListAdapter.notifyDataSetChanged();
         mSmartRefreshLayout.setOnRefreshListener(this);
         mSmartRefreshLayout.setOnLoadMoreListener(this);
+        if (User.getInstance().getRid().equals("1")){
+            ivAdd.setVisibility(View.GONE);
+        }
+
         return view;
     }
 
     @Override
-    public void getData(boolean refresh) {
-
-       /* try {
-            if (pageNum < 1) {
-                pageNum = 1;
+    public void getData(boolean isRefresh) {
+        try {
+            if (pageNum < 0) {
+                pageNum = 0;
             }
             //同步请求
-            HttpParams httpParams = new HttpParams();
-            httpParams.put(pageNumStr, pageNum);
+            Map<String, Object> httpParams = new HashMap();
+            //httpParams.put(pageNumStr, String.valueOf(pageNum));
+            if (isRefresh) {
+                httpParams.put(pageNumStr, "0");
+            } else {
+                httpParams.put(pageNumStr, String.valueOf(mSumList.size()));
+            }
             httpParams.put(pageSizeStr, pageSize);
-            Response response = OkGo.get(NetApi.URL_TASK_GET_EXE_LIST).params(httpParams).execute();
+            httpParams.put(mIdStr, "1");
+            //是否是教师
+            if (getArguments()!=null){
+                boolean isteacher=getArguments().getBoolean("isteacher", false);
+                if (isteacher){
+                    httpParams.put("createUser", User.getInstance().getUserId());
+                }
+            }
+            Gson gson = new Gson();
+            String jsonstr = gson.toJson(httpParams);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonstr);
+            Response response = OkGo.post(NetApi.RESOURCE_LIST).upRequestBody(requestBody).execute();
             if (response.isSuccessful()) {
                 String str = response.body().string();
                 if (!TextUtils.isEmpty(str)) {
@@ -112,54 +155,44 @@ public class JavaFragmentBasis extends JavaBaseFragment implements OnRefreshList
                     JSONObject jsonObject = new JSONObject(str);
                     int code = jsonObject.optInt(Constant.CODE);
                     String info = jsonObject.optString(Constant.INFO);
-                    if (code == NetResultCode.CODE10000.getCode()) {
-                        mTaskExeBean = FastJsonUtil.toBean(info, TaskExeBean.class);
+                    String data = jsonObject.optString(Constant.DATA);
+                    if (code == NetResultCode.CODE200.getCode()) {
+                        mBasisBean = FastJsonUtils.toBean(data, BasisBean.class);
                         if (isRefresh) {
                             mSumList.clear();
                         }
-                        if (mTaskExeBean != null && mTaskExeBean.getResult() != null) {
-                            mSumList.addAll(mTaskExeBean.getResult());
+                        if (mBasisBean != null && mBasisBean.getLists() != null) {
+                            mSumList.addAll(mBasisBean.getLists());
                         } else {
-                            --pageSize;
+
                             ToastUtil.showToast(Constant.DATA_ERROR_PARSING);
                         }
                     } else {
-                        --pageNum;
+
                         ToastUtil.showToast(NetResultCode.getCode(code).getDesc());
                     }
                 } else {
-                    --pageNum;
+
                     ToastUtil.showToast(Constant.DATA_ERROR_SERVER);
                 }
             } else {
-                --pageNum;
+
                 ToastUtil.showToast(Constant.DATA_ERROR_NET);
             }
         } catch (Exception e) {
-            --pageNum;
             e.printStackTrace();
             ToastUtil.showToast(Constant.DATA_ERROR_SERVER_RETRY);
-        }*/
-
-
-        mSumList.clear();
-        BasisBean taskExeBean;
-        for (int i = 0; i < 20; i++) {
-            taskExeBean = new BasisBean();
-            mSumList.add(taskExeBean);
         }
     }
 
     @OnClick(R.id.iv_add)
     public void onViewClicked() {
-        // ToastUtil.showToast("新增基础知识");
-        showAddListDialog();
+        showAddListDialog("1", mSmartRefreshLayout);
     }
 
     private Runnable mloadMoreRunnable = new Runnable() {
         @Override
         public void run() {
-            pageNum++;
             getData(false);
             mSmartRefreshLayout.finishLoadMore();
             getActivity().runOnUiThread(new Runnable() {
@@ -173,7 +206,6 @@ public class JavaFragmentBasis extends JavaBaseFragment implements OnRefreshList
     private Runnable mloadRefreshRunnable = new Runnable() {
         @Override
         public void run() {
-            pageNum = 1;
             getData(true);
             mSmartRefreshLayout.finishRefresh();
             getActivity().runOnUiThread(new Runnable() {
@@ -206,71 +238,24 @@ public class JavaFragmentBasis extends JavaBaseFragment implements OnRefreshList
         ThreadPoolProxyFactory.getNormalThreadPoolProxy().submit(mloadMoreRunnable);
     }
 
-
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         switch (view.getId()) {
             case R.id.iv_delete:
-                //ToastUtil.showToast("删除");
-                showDetailsDialog("Java简介");
+                showDetailsDialog(mSumList, position, mBasisListAdapter);
                 break;
             case R.id.ll_layout:
-                BasisListActivity.actionStart(getContext());
+                BasisListActivity.actionStart(getContext(), mSumList.get(position), "1", "基础知识");
                 break;
             default:
                 break;
         }
     }
 
-    /**
-     * 新增一个大栏目
-     */
-    private void showAddListDialog() {
-        LinearLayout view = (LinearLayout) getLayoutInflater().inflate(R.layout.dialog_add_basis_item, null);
-        final TextView mTvTitle = view.findViewById(R.id.tv_title);
-        final EditText mTitle = view.findViewById(R.id.et_title);
-        final EditText mDetails = view.findViewById(R.id.et_details);
-        mTvTitle.setText("新增基础知识栏目");
-        Dialog scooldialog = new AlertDialog.Builder(getActivity())
-                .setView(view)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ToastUtil.showToast("标题:" + mTitle.getText().toString());
-                        IOSDialogUtils.NoCosleDialog(dialog, false);
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        IOSDialogUtils.NoCosleDialog(dialog, true);
-                    }
-                })
-                .setCancelable(true)
-                .create();
-        Window window = scooldialog.getWindow();
-        window.setWindowAnimations(R.style.BaseDialogWindowStyle);
-        scooldialog.setCancelable(false);
-        scooldialog.show();
-    }
-
-    /**
-     * 删除
-     */
-    private void showDetailsDialog(String title) {
-        Dialog scooldialog = new AlertDialog.Builder(getActivity())
-                .setTitle("提示")
-                .setMessage("是否删除:" + title)
-                .setPositiveButton("确定", (dialog, id) -> {
-                    ToastUtil.showToast("删除");
-                    IOSDialogUtils.NoCosleDialog(dialog, false);
-                })
-                .setNegativeButton("取消", (dialog, id) -> IOSDialogUtils.NoCosleDialog(dialog, true))
-                .setCancelable(true)
-                .create();
-        Window window = scooldialog.getWindow();
-        window.setWindowAnimations(R.style.BaseDialogWindowStyle);
-        scooldialog.setCancelable(false);
-        scooldialog.show();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ThreadPoolProxyFactory.getNormalThreadPoolProxy().remove(mloadRefreshRunnable);
+        ThreadPoolProxyFactory.getNormalThreadPoolProxy().remove(mloadMoreRunnable);
     }
 }

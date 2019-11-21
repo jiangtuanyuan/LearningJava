@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/main_color"
     tools:context=".ui.SetIPActivity">
 
     <include layout="@layout/base_white_toolbar" />
@@ -13,14 +12,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_45"
+        android:layout_marginTop="@dimen/dp_85"
         android:gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_100"
             android:layout_height="wrap_content"
             android:text="I   P 设  置 : "
-            android:textColor="@color/white"
+            android:textColor="@color/main_color"
             android:textSize="16sp" />
 
         <EditText
@@ -33,7 +32,7 @@
             android:maxLength="15"
             android:padding="6dp"
             android:singleLine="true"
-            android:textColor="@color/white"
+            android:textColor="@color/main_color"
             android:textCursorDrawable="@null"
             android:textSize="16sp" />
     </LinearLayout>
@@ -45,10 +44,10 @@
         android:gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_100"
             android:layout_height="wrap_content"
             android:text="端 口 设 置 : "
-            android:textColor="@color/white"
+            android:textColor="@color/main_color"
             android:textSize="16sp" />
 
         <EditText
@@ -61,7 +60,7 @@
             android:maxLength="10"
             android:padding="6dp"
             android:singleLine="true"
-            android:textColor="@color/white"
+            android:textColor="@color/main_color"
             android:textCursorDrawable="@null"
             android:textSize="16sp" />
     </LinearLayout>
@@ -72,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_38"
         android:layout_margin="@dimen/dp_38"
-        android:background="@color/white"
+        android:background="@color/main_color"
         android:text="确  定"
         android:textColor="#000000"
         android:textSize="16sp" />

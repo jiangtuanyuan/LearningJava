@@ -34,8 +34,8 @@ public class BuglyUtils {
         Beta.autoInit = true;
         //自动检查更新开关 是否自动检测APP更新 false:手动调用Beta.checkUpgrade()方法;
         Beta.autoCheckUpgrade = true;
-        //设置升级检查周期为60s(默认检查周期为0s)，60s内SDK不重复向后台请求策略);
-        Beta.upgradeCheckPeriod = 40 * 1000;
+        //设置升级检查周期为20s(默认检查周期为0s)，60s内SDK不重复向后台请求策略);
+        Beta.upgradeCheckPeriod = 20 * 1000;
         //设置启动延时为1s（默认延时3s），APP启动1s后初始化SDK，避免影响APP启动速度;
         Beta.initDelay = 5 * 1000;
         //设置通知栏大图标

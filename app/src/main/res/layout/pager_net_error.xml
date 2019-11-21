@@ -29,7 +29,7 @@
             android:layout_height="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_14"
             android:background="@drawable/dialog_fly_shape_ok"
-            android:text="重新加载"
+            android:text="刷 新"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_12" />
     </LinearLayout>
