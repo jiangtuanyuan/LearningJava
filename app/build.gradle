@@ -128,6 +128,9 @@ dependencies {
     implementation 'com.bm.photoview:library:1.4.1'
     /*Litepay*/
     implementation 'org.litepal.android:java:3.0.0'
+    //AndroidUtilCode Androidx
+    implementation 'com.blankj:utilcodex:1.26.0'
+
 
 }
 // 获取打包时间
